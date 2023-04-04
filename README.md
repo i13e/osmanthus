@@ -1,4 +1,4 @@
-# :chess_pawn: Osmanthus
+# Osmanthus
 Osmanthus is a chess engine which implements:
 TODO
 
