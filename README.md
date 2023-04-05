@@ -11,7 +11,8 @@ To begin with, clone the git repository using the following command in your term
 git clone https://github.com/i13e/osmanthus.git
 ```
 
-Then, navigate to the cloned repository's directory and create a new Python virtual environment by running the following command:
+Then, navigate to the cloned repository's directory and create a new Python virtual environment by running
+the following command:
 
 ```sh
 cd osmanthus
@@ -31,16 +32,20 @@ Next, install the packages listed in the `requirements.txt` file using the follo
 pip install -r requirements.txt
 ```
 
-Finally, to play against the engine in the terminal, run the following command:
-
-```sh
-python tui.py
-```
-You're now ready to play! Once you're done, simply exit the environment by running the following command:
+You're now ready to play/contribute! Once you're done, simply exit the environment by running the following command:
 
 ```sh
 deactivate
 ```
+
+## Play via CLI
+
+Start the interface with:
+
+```sh
+python tui.py
+```
+<!-- Maybe include a gif of the interface here? -->
 
 ## Tests
 There are unit tests for the engine, UI, and evaluation modules. I'm in the process of adding as many forced 
@@ -51,6 +56,7 @@ pytest test/
 ```
 
 ## Contributing
-TODO
+For coding style, I recommend reading [Google's Python Style Guide](https://google.github.io/styleguide/pyguide.html)
+as a place to start.
 
 <!-- 谢谢，李桂花。我愛你 -->
