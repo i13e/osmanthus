@@ -45,6 +45,7 @@ Start the interface with:
 ```sh
 python tui.py
 ```
+
 <!-- Maybe include a gif of the interface here? -->
 
 ## Tests
