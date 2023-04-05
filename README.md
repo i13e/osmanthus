@@ -48,7 +48,11 @@ python tui.py
 
 <!-- Maybe include a gif of the interface here? -->
 
+Moves are input in either Standard Algebraic Notation (SAN) or Universal Chess Interface notation. I would
+recommend using SAN; for those new to the notation, I wrote a short guide [here](https://github.com/i13e/osmanthus/wiki/SAN-Notation)
+
 ## Tests
+
 There are unit tests for the engine, UI, and evaluation modules. I'm in the process of adding as many forced 
 checkmate in 1-3 moves as I can. To run the unit tests, make sure your virtual environment is active and run:
 
