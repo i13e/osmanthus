@@ -49,7 +49,7 @@ python tui.py
 <!-- Maybe include a gif of the interface here? -->
 
 Moves are input in either Standard Algebraic Notation (SAN) or Universal Chess Interface notation. I would
-recommend using SAN; for those new to the notation, I wrote a short guide [here](https://github.com/i13e/osmanthus/wiki/SAN-Notation)
+recommend using SAN; for those new to the notation, I wrote a short guide [here](https://github.com/i13e/osmanthus/wiki/san).
 
 ## Tests
 
