@@ -5,14 +5,14 @@ A chess engine which implements:
 
 ## Getting Started
 
-To begin with, clone the git repository using the following command in your terminal/command prompt:
+To begin, clone the Git repository by entering the following command in your terminal/command prompt:
 
 ```sh
 git clone https://github.com/i13e/osmanthus.git
 ```
 
-Then, navigate to the cloned repository's directory and create a new Python virtual environment by running
-the following command:
+Once you have cloned the repository, navigate to its directory and create a new Python virtual environment
+by running:
 
 ```sh
 cd osmanthus
@@ -32,7 +32,8 @@ Next, install the packages listed in the `requirements.txt` file using the follo
 pip install -r requirements.txt
 ```
 
-You're now ready to play/contribute! Once you're done, simply exit the environment by running the following command:
+You're now ready to play/contribute! Once you've finished, you can exit the environment by running
+the following command (or simply close the terminal):
 
 ```sh
 deactivate
@@ -40,7 +41,7 @@ deactivate
 
 ## Play via CLI
 
-Start the interface with:
+To start the CLI interface, enter the following command:
 
 ```sh
 python cli.py
@@ -48,20 +49,28 @@ python cli.py
 
 <!-- Maybe include a gif of the interface here? -->
 
-Moves are input in either Standard Algebraic Notation (SAN) or Universal Chess Interface notation. I would
-recommend using SAN; for those new to the notation, I wrote a short guide [here](https://github.com/i13e/osmanthus/wiki/san).
+Moves can be input in Standard Algebraic Notation (SAN) or Universal Chess Interface notation. We
+recommend using SAN. If you are new to this notation, we have provided a short guide on our 
+[wiki page](https://github.com/i13e/osmanthus/wiki/san).
 
 ## Tests
 
-There are unit tests for the engine, UI, and evaluation modules. I'm in the process of adding as many forced 
-checkmate in 1-3 moves as I can. To run the unit tests, make sure your virtual environment is active and run:
+There are unit tests for the engine, UI, and evaluation modules. We are in the process of adding as
+many forced checkmate scenarios as possible. To run the unit tests, ensure that your virtual environment
+is active and enter the following command:
 
 ```sh
 pytest test/
 ```
 
 ## Contributing
-For coding style, I recommend reading [Google's Python Style Guide](https://google.github.io/styleguide/pyguide.html)
-as a place to start.
+
+Contributions to Osmanthus are most welcome! For suggestions, we recommend looking at any open issues,
+especially those tagged as "Good First Issue" if you are a first-time contributor. We are opening as many
+issues as possible related to planned features and bugs that need to be fixed.
+
+When contributing, we ask that you follow the coding style laid out in [Google's Python Style Guide](https://google.github.io/styleguide/pyguide.html).
+
+Thank you for your interest in Osmanthus, and we look forward to your contributions!
 
 <!-- 谢谢，李桂花。我愛你 -->
