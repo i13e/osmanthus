@@ -64,7 +64,7 @@ many forced checkmate scenarios as possible. To run the unit tests, ensure that 
 is active and enter the following command:
 
 ```sh
-pytest test/
+pytest
 ```
 
 ## Contributing
