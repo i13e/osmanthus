@@ -1,7 +1,8 @@
 # Osmanthus
 
-A chess engine which implements:
-- TODO
+Osmanthus is a sophisticated chess engine that employs advanced algorithms to provide a challenging
+and enjoyable playing experience. It offers a range of features, including self play, puzzle solving,
+and an intuitive command-line interface.
 
 ## Getting Started
 
@@ -32,7 +33,7 @@ Next, install the packages listed in the `requirements.txt` file using the follo
 pip install -r requirements.txt
 ```
 
-You're now ready to play/contribute! Once you've finished, you can exit the environment by running
+You're now ready to play or contribute! Once you've finished, you can exit the environment by running
 the following command (or simply close the terminal):
 
 ```sh
@@ -53,6 +54,9 @@ Moves can be input in Standard Algebraic Notation (SAN) or Universal Chess Inter
 recommend using SAN. If you are new to this notation, we have provided a short guide on our 
 [wiki page](https://github.com/i13e/osmanthus/wiki/san).
 
+If you are new to playing chess, we suggest checking out [this video](https://www.youtube.com/watch?v=OCSbzArwB10)
+to learn the fundamentals.
+
 ## Tests
 
 There are unit tests for the engine, UI, and evaluation modules. We are in the process of adding as
@@ -65,9 +69,9 @@ pytest test/
 
 ## Contributing
 
-Contributions to Osmanthus are most welcome! For suggestions, we recommend looking at any open issues,
-especially those tagged as "Good First Issue" if you are a first-time contributor. We are opening as many
-issues as possible related to planned features and bugs that need to be fixed.
+Contributions to Osmanthus are highly appreciated! For suggestions, we recommend looking at any open issues,
+particularly those tagged as "Good First Issue" if you are a first-time contributor. We are also opening new
+issues related to planned features and bugs that need to be fixed.
 
 When contributing, we ask that you follow the coding style laid out in [Google's Python Style Guide](https://google.github.io/styleguide/pyguide.html).
 
