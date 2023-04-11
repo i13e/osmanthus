@@ -43,7 +43,7 @@ deactivate
 Start the interface with:
 
 ```sh
-python tui.py
+python cli.py
 ```
 
 <!-- Maybe include a gif of the interface here? -->
