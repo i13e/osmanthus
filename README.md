@@ -1,40 +1,44 @@
 # Osmanthus
 
-Osmanthus is a sophisticated chess engine that employs advanced algorithms to provide a challenging
-and enjoyable playing experience. It offers a range of features, including self play, puzzle solving,
-and an intuitive command-line interface.
+Osmanthus is a sophisticated chess engine that employs advanced algorithms to
+provide a challenging and enjoyable playing experience. It offers a range of
+features, including self play, puzzle solving, and an intuitive command-line
+interface.
 
 ## Getting Started
 
-To begin, clone the Git repository by entering the following command in your terminal/command prompt:
+To begin, clone the Git repository by entering the following command in your
+terminal/command prompt:
 
 ```sh
 git clone https://github.com/i13e/osmanthus.git
 ```
 
-Once you have cloned the repository, navigate to its directory and create a new Python virtual environment
-by running:
+Once you have cloned the repository, navigate to its directory and create a new
+Python virtual environment by running:
 
 ```sh
 cd osmanthus
 python -m venv env
 ```
 
-Activate the environment by running either of the following commands based on your operating system:
+Activate the environment by running either of the following commands based on
+your operating system:
 
 ```sh
 source env/bin/activate # Mac or Linux
 env\Scripts\activate # Windows
 ```
 
-Next, install the packages listed in the `requirements.txt` file using the following command:
+Next, install the packages listed in the `requirements.txt` file using the
+following command:
 
 ```sh
 pip install -r requirements.txt
 ```
 
-You're now ready to play or contribute! Once you've finished, you can exit the environment by running
-the following command (or simply close the terminal):
+You're now ready to play or contribute! Once you've finished, you can exit the
+environment by running the following command (or simply close the terminal):
 
 ```sh
 deactivate
@@ -45,7 +49,7 @@ deactivate
 To start the CLI interface, enter the following command:
 
 ```sh
-python cli.py
+python -m osmanthus.cli
 ```
 
 <!-- Maybe include a gif of the interface here? -->
