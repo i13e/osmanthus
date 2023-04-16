@@ -1,7 +1,9 @@
-import chess
 import argparse
 import logging
-from engine import get_engine_move
+
+import chess
+
+from .engine import get_engine_move
 
 
 # Set up the command line argument parser
@@ -15,10 +17,10 @@ parser.add_argument("--fen", type=str, default="", help="Starting position in FE
 def main() -> None:
     """
     Parse command line arguments, initialize the game board, and enter the main
-    game loop. The game loop alternates between the user and the AI making moves.
-    If playing against the AI, the user can specify their desired difficulty level
-    with the `depth argument`. The game ends when a checkmate or stalemate occurs,
-    and the final board state and result are printed.
+    game loop. The game loop alternates between the user and the AI making
+    moves. If playing against the AI, the user can specify their desired
+    difficulty level with the `depth argument`. The game ends when a checkmate
+    or stalemate occurs, and the final board state and result are printed.
     """
 
     # Parse command line arguments
@@ -40,20 +42,23 @@ def main() -> None:
         board = chess.Board()
 
     # Main game loop
-    while not board.is_game_over():
-        # Display the current state of the board
-        print_fancy_board(board, user_color)
+    try:
+        while not board.is_game_over():
+            # Display the current state of the board
+            print_fancy_board(board, user_color)
 
-        # Determine the next move, either from user input or engine calculation
-        if not args.selfplay and board.turn == user_color:
-            while not (move := get_user_move(board)):
-                print("Illegal Move.")
-        else:
-            move = get_engine_move(max(1, args.depth), board, debug=args.debug)
-            print(f" My move: {board.san(move)}")
+            # Determine the next move, either from user input or engine calculation
+            if not args.selfplay and board.turn == user_color:
+                while not (move := get_user_move(board)):
+                    print("Illegal Move.")
+            else:
+                move = get_engine_move(max(1, args.depth), board, debug=args.debug)
+                print(f"My move: {board.san(move)}")
 
-        # Push the move to the board
-        board.push(move)
+            # Push the move to the board
+            board.push(move)
+    except KeyboardInterrupt:
+        pass
 
     # Print the final state of the board and the result of the game
     print_fancy_board(board, user_color)
@@ -82,16 +87,16 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
     highlight_color = "\x1b[48;5;153m"
 
     # Determine row and column ranges based on user's color preference
-    ROWS = range(8) if user_color == chess.BLACK else range(8)[::-1]
-    COLS = range(8) if user_color == chess.WHITE else range(8)[::-1]
+    rows = range(8) if user_color == chess.BLACK else range(8)[::-1]
+    cols = range(8) if user_color == chess.WHITE else range(8)[::-1]
 
 
     # Iterate over the rows and columns to print the board
-    for r in ROWS:
-        line = [f"{start_color} {r+1}"]
-        for c in COLS:
+    for row in rows:
+        line = [f"{start_color} {row+1}"]
+        for col in cols:
             # Determine the background color for the square
-            if (r + c) % 2:
+            if (row + col) % 2:
                 bg_color = dark_square_color
             else:
                 bg_color = light_square_color
@@ -99,11 +104,11 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
             # Highlight the square if it was involved in the last move
             if board.move_stack:
                 last_move = board.peek()
-                if 8 * r + c in {last_move.from_square, last_move.to_square}:
+                if 8 * row + col in {last_move.from_square, last_move.to_square}:
                     bg_color = highlight_color
 
             # Get the piece at the current square (if any)
-            piece = board.piece_at(8 * r + c)
+            piece = board.piece_at(8 * row + col)
             symbol = chess.UNICODE_PIECE_SYMBOLS[piece.symbol()] if piece else " "
             line.append(bg_color + symbol)
 
@@ -117,7 +122,7 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
         print(f" {start_color}   h g f e d c b a  {end_color}\n")
 
 
-def get_user_move(board: chess.Board):
+def get_user_move(board: chess.Board) -> chess.Move | None:
     """
     Prompts the user to enter a move in Standard Algebraic Notation (SAN) or
     Universal Chess Interface (UCI) format, validates the input against the
@@ -139,18 +144,15 @@ def get_user_move(board: chess.Board):
     # Prompt user for input.
     uci = input(f"Your move (e.g. {san_option} or {uci_option}): ")
 
-    # Try to parse input as SAN or UCI format and check if it is a legal move.
+    # Try to parse input as SAN or UCI and check if it is a legal move.
     for parse in (board.parse_san, chess.Move.from_uci):
         try:
             if (move := parse(uci)) in board.legal_moves:
                 return move
         except ValueError:
             pass
+    return None
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    # Exit gracefully on C-c
-    except KeyboardInterrupt:
-        pass
+    main()
