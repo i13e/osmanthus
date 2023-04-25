@@ -57,8 +57,9 @@ def main() -> None:
 
             # Push the move to the board
             board.push(move)
+    # Exit gracefully on C-c
     except KeyboardInterrupt:
-        pass
+        return
 
     # Print the final state of the board and the result of the game
     print_fancy_board(board, user_color)
@@ -147,7 +148,7 @@ def get_user_move(board: chess.Board) -> chess.Move | None:
     # Try to parse input as SAN or UCI and check if it is a legal move.
     for parse in (board.parse_san, chess.Move.from_uci):
         try:
-            if (move := parse(uci)) in board.legal_moves:
+            if board.is_legal(move := parse(uci)):
                 return move
         except ValueError:
             pass
