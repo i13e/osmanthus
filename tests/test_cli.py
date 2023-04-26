@@ -49,7 +49,7 @@ def test_get_user_move(monkeypatch):
     # Test legal moves
     for move in all_legal_moves:
         # Use lambda function to simulate user input
-        monkeypatch.setattr('builtins.input', lambda _: move)
+        monkeypatch.setattr('builtins.input', lambda _: str(move))
         # Assert that returned move object matches the input
         assert get_user_move(board) == move
 
