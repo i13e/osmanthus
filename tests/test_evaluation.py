@@ -12,9 +12,9 @@ def test_favorable_move() -> None:
     """
 
     # Open the positions file
-    with open("tests/test_files/positions.fen") as f:
+    with open("tests/test_files/positions.fen", encoding="utf-8") as file:
         # Read each line (position) in the file and remove trailing whitespace
-        positions = (line.strip() for line in f.readlines())
+        positions = (line.strip() for line in file.readlines())
 
     # Test each position
     for fen in positions:
@@ -32,19 +32,19 @@ def test_is_endgame() -> None:
 
     # Test the starting position (not an endgame)
     board = chess.Board(chess.STARTING_FEN)
-    assert check_endgame(board) == False
+    assert check_endgame(board) is False
 
     # Open the endgame file
-    with open("tests/test_files/endgame.fen") as f:
+    with open("tests/test_files/endgame.fen", encoding="utf-8") as file:
         # Read each line (position) in the file and remove trailing whitespace
-        endgame = (line.strip() for line in f.readlines())
+        endgame = (line.strip() for line in file.readlines())
 
     # Test each endgame position
     for fen in endgame:
         # Create a new chess board using the FEN string
         board = chess.Board(fen)
         # Check if the board is in an endgame state
-        assert check_endgame(chess.Board(fen)) == True
+        assert check_endgame(chess.Board(fen)) is True
 
 
 def test_evaluate_board() -> None:
@@ -60,8 +60,3 @@ def test_evaluate_board() -> None:
     # Test a position where white has played e4
     white_played_e4 = chess.Board("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
     assert evaluate_board(white_played_e4) > 0
-
-    # Note: The following test case is commented out because it is not needed for the current test suite
-    # Test a position where black has played Nc3
-    # black_played_Nc3 = chess.Board("r1bqkbnr/pppppppp/2n5/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 1 2")
-    # assert evaluate_board(black_played_Nc3) > 0

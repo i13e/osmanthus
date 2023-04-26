@@ -10,8 +10,8 @@ def test_mate_in_one() -> None:
 
 
     # Load FEN positions from a file
-    with open("tests/test_files/mate1.fen") as f:
-        mate1_puzzles = (line.strip() for line in f.readlines())
+    with open("tests/test_files/mate1.fen", encoding="utf-8") as file:
+        mate1_puzzles = (line.strip() for line in file.readlines())
 
     # Iterate through each board position and test if engine can find mate-in-1
     for fen in mate1_puzzles:
@@ -31,8 +31,8 @@ def test_mate_in_two() -> None:
     """
 
     # Load FEN positions from a file
-    with open("tests/test_files/mate2.fen") as f:
-        mate2_puzzles = (line.strip() for line in f.readlines())
+    with open("tests/test_files/mate2.fen", encoding="utf-8") as file:
+        mate2_puzzles = (line.strip() for line in file.readlines())
 
     # Iterate through each board position and test if engine can find mate-in-2
     for fen in mate2_puzzles:
@@ -71,12 +71,12 @@ def test_mate_in_three() -> None:
     #     assert board.is_checkmate()
 
 
-# The following tests are commented out, as they are currently not in use in the test suite.
+# The following tests are commented out, as they are currently not in use.
 
 # def test_stalemate() -> None:
 #     """
-#     This function tests if get_engine_move returns None when there are no legal moves that can be made
-#     and the game is a stalemate.
+#     This function tests if get_engine_move returns None when there
+#     are no legal moves that can be made and the game is a stalemate.
 #     """
 #
 #     # Stalemate puzzle
@@ -86,7 +86,8 @@ def test_mate_in_three() -> None:
 #
 # def test_no_legal_moves() -> None:
 #     """
-#     This function tests if get_engine_move returns None when there are no legal moves that can be made.
+#     This function tests if get_engine_move returns None when there
+#     are no legal moves that can be made.
 #     """
 #
 #     # Test when there are no legal moves for the current player
