@@ -63,7 +63,7 @@ to learn the fundamentals.
 
 ## Tests
 
-There are unit tests for the engine, UI, and evaluation modules. We are in the process of adding as
+There are unit tests for the engine, CLI, and evaluation modules. We are in the process of adding as
 many forced checkmate scenarios as possible. To run the unit tests, ensure that your virtual environment
 is active and enter the following command:
 
