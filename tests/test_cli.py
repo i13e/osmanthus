@@ -1,7 +1,10 @@
-import chess
 import io
 import sys
-from osmanthus.cli import print_fancy_board, get_user_move
+
+import chess
+
+from osmanthus.cli import print_fancy_board
+from osmanthus.cli import get_user_move
 
 
 def test_fancy_board() -> None:
