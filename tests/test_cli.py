@@ -37,8 +37,8 @@ def test_get_user_move(monkeypatch):
     """
     Unit test for the get_user_move function.
 
-    Tests whether the function can correctly parse user input and return the corresponding
-    move object, or None if the input is not a legal move.
+    Tests whether the function can correctly parse user input and return the
+    corresponding move object, or None if the input is not a legal move.
     """
 
     # Set up legal and illegal moves
@@ -58,4 +58,4 @@ def test_get_user_move(monkeypatch):
         # Use lambda function to simulate user input
         monkeypatch.setattr('builtins.input', lambda _: move)
         # Assert that returned move object is None
-        assert get_user_move(board) is None
+        assert get_user_move(board) == None
