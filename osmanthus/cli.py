@@ -10,7 +10,8 @@ from .engine import get_engine_move
 parser = argparse.ArgumentParser(description="Play chess against an engine in the terminal.")
 parser.add_argument("--debug", action="store_true", help="Enable debug logging.")
 parser.add_argument("--selfplay", action="store_true", help="Engine plays against itself.")
-parser.add_argument("--depth", type=int, default=3, help="Engine search depth. Defaults to 3")
+parser.add_argument("--depth", type=int, default=3, help="Engine search depth. Defaults to 3.")
+parser.add_argument("--limit", type=int, default=15, help="Engine time limit. Defaults to 15.")
 parser.add_argument("--fen", type=str, default="", help="Starting position in FEN notation.")
 
 
@@ -47,12 +48,13 @@ def main() -> None:
             # Display the current state of the board
             print_fancy_board(board, user_color)
 
+            move = None
             # Determine the next move, either from user input or engine calculation
             if not args.selfplay and board.turn == user_color:
                 while not (move := get_user_move(board)):
                     print("Illegal Move.")
             else:
-                move = get_engine_move(max(1, args.depth), board, debug=args.debug)
+                move = get_engine_move(board, args.depth, args.limit, args.debug)
                 print(f"My move: {board.san(move)}")
 
             # Push the move to the board
