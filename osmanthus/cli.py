@@ -49,7 +49,7 @@ def main() -> None:
             print_fancy_board(board, user_color)
 
             move = None
-            # Determine the next move, either from user input or engine calculation
+            # Determine the next move, either from user or engine
             if not args.selfplay and board.turn == user_color:
                 while not (move := get_user_move(board)):
                     print("Illegal Move.")
@@ -70,13 +70,13 @@ def main() -> None:
 
 def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
     """
-    Print the current state of a chess board in a visually appealing way,
+    Print the current state of a chess board in a visually appealing way.
     Inspired by Sunfish.
 
     Args:
         board (chess.Board): The chess board to be printed.
-        user_color (chess.Color, optional): The color of the player who is
-        viewing the board. Defaults to chess.WHITE.
+        user_color (chess.Color, optional): The color of the player
+        who is viewing the board. Defaults to chess.WHITE.
 
     Returns:
         None.
@@ -90,9 +90,8 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
     highlight_color = "\x1b[48;5;153m"
 
     # Determine row and column ranges based on user's color preference
-    rows = range(8) if user_color == chess.BLACK else range(8)[::-1]
-    cols = range(8) if user_color == chess.WHITE else range(8)[::-1]
-
+    rows = range(8)[::(-1)**(user_color == chess.WHITE)]
+    cols = range(8)[::(-1)**(user_color == chess.BLACK)]
 
     # Iterate over the rows and columns to print the board
     for row in rows:

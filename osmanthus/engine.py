@@ -22,12 +22,12 @@ global_best_move: chess.Move
 DEPTH = 0
 IS_TIMEOUT = False
 move_scores: dict = defaultdict(dict)
-start_time : float
+start_time: float
 
 
 def get_engine_move(board: chess.Board, depth=3, limit=15, debug=False) -> chess.Move:
     """
-    Given the current state of the board, returns the best move for the current player.
+    Given the current state of the board, returns the best move for the engine.
 
     Args:
         board (chess.Board): The current state of the chess board.
@@ -119,8 +119,8 @@ def iterative_deepening(board: chess.Board, depth: int, debug: bool) -> chess.Mo
             # Print debug information if requested
             if debug:
                 print(f"Completed search with depth {DEPTH}. "
-                f"Best move so far: {board.san(global_best_move)} "
-                f"(Score: {current_score})")
+                      f"Best move so far: {board.san(global_best_move)} "
+                      f"(Score: {current_score})")
 
     return global_best_move
 
@@ -182,11 +182,11 @@ def minimax(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
         board.pop()
 
         # Update the score and best_move if necessary, and perform alpha-beta pruning
-        if (board.turn and move_score > score) or (not board.turn and move_score < score):
+        if (board.turn and move_score > score) or ((not board.turn) and move_score < score):
             score = move_score
             if depth == DEPTH:
                 best_move = move
-            if (board.turn and score >= beta) or (not board.turn and score <= alpha):
+            if (board.turn and score >= beta) or ((not board.turn) and score <= alpha):
                 break
 
     return score
