@@ -1,10 +1,12 @@
+from __future__ import annotations
+
 import io
 import sys
 
 import chess
 
-from osmanthus.cli import print_fancy_board
 from osmanthus.cli import get_user_move
+from osmanthus.cli import print_fancy_board
 
 
 def test_fancy_board() -> None:

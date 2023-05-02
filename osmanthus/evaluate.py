@@ -1,5 +1,6 @@
 # This file implements Tomasz Michniewski's Simplified Evaluation Function
 # https://www.chessprogramming.org/Simplified_Evaluation_Function
+from __future__ import annotations
 
 import chess
 
@@ -14,14 +15,14 @@ PIECE_VALUE = {
 
 PST = {
     chess.PAWN: [
-          0,   0,   0,   0,   0,   0,   0,   0,
-         50,  50,  50,  50,  50,  50,  50,  50,
-         10,  10,  20,  30,  30,  20,  10,  10,
-          5,   5,  10,  25,  25,  10,   5,   5,
-          0,   0,   0,  20,  20,   0,   0,   0,
-          5,  -5, -10,   0,   0, -10,  -5,   5,
-          5,  10,  10, -20, -20,  10,  10,   5,
-          0,   0,   0,   0,   0,   0,   0,   0,
+        0,   0,   0,   0,   0,   0,   0,   0,
+        50,  50,  50,  50,  50,  50,  50,  50,
+        10,  10,  20,  30,  30,  20,  10,  10,
+        5,   5,  10,  25,  25,  10,   5,   5,
+        0,   0,   0,  20,  20,   0,   0,   0,
+        5,  -5, -10,   0,   0, -10,  -5,   5,
+        5,  10,  10, -20, -20,  10,  10,   5,
+        0,   0,   0,   0,   0,   0,   0,   0,
     ],
 
     chess.KNIGHT: [
@@ -47,22 +48,22 @@ PST = {
     ],
 
     chess.ROOK: [
-          0,   0,   0,   0,   0,   0,   0,   0,
-          5,  10,  10,  10,  10,  10,  10,   5,
-         -5,   0,   0,   0,   0,   0,   0,  -5,
-         -5,   0,   0,   0,   0,   0,   0,  -5,
-         -5,   0,   0,   0,   0,   0,   0,  -5,
-         -5,   0,   0,   0,   0,   0,   0,  -5,
-         -5,   0,   0,   0,   0,   0,   0,  -5,
-          0,   0,   0,   5,   5,   0,   0,   0,
+        0,   0,   0,   0,   0,   0,   0,   0,
+        5,  10,  10,  10,  10,  10,  10,   5,
+        -5,   0,   0,   0,   0,   0,   0,  -5,
+        -5,   0,   0,   0,   0,   0,   0,  -5,
+        -5,   0,   0,   0,   0,   0,   0,  -5,
+        -5,   0,   0,   0,   0,   0,   0,  -5,
+        -5,   0,   0,   0,   0,   0,   0,  -5,
+        0,   0,   0,   5,   5,   0,   0,   0,
     ],
 
     chess.QUEEN: [
         -20, -10, -10,  -5,  -5, -10, -10, -20,
         -10,   0,   0,   0,   0,   0,   0, -10,
         -10,   0,   5,   5,   5,   5,   0, -10,
-         -5,   0,   5,   5,   5,   5,   0,  -5,
-         -5,   0,   5,   5,   5,   5,   0,  -5,
+        -5,   0,   5,   5,   5,   5,   0,  -5,
+        -5,   0,   5,   5,   5,   5,   0,  -5,
         -10,   0,   5,   5,   5,   5,   0, -10,
         -10,   0,   0,   0,   0,   0,   0, -10,
         -20, -10, -10,  -5,  -5, -10, -10, -20,
@@ -75,8 +76,8 @@ PST = {
         -30, -40, -40, -50, -50, -40, -40, -30,
         -20, -30, -30, -40, -40, -30, -30, -20,
         -10, -20, -20, -20, -20, -20, -20, -10,
-         20,  20,   0,   0,   0,   0,  20,  20,
-         20,  30,  10,   0,   0,  10,  30,  20,
+        20,  20,   0,   0,   0,   0,  20,  20,
+        20,  30,  10,   0,   0,  10,  30,  20,
     ],
 }
 
@@ -111,14 +112,16 @@ def is_favorable_move(board: chess.Board, move: chess.Move) -> bool:
 
         # Make sure there are pieces at both the destination and source squares
         if not (to_piece_type and from_piece_type):
-            raise ValueError(f"Pieces were expected at both {move.to_square}"
-                             f"and {move.from_square}")
+            raise ValueError(
+                f"Pieces were expected at both {move.to_square}"
+                f"and {move.from_square}",
+            )
 
-        # Check if the move captures a higher value piece than the piece making the capture
+        # Is this move a good trade?
         if PIECE_VALUE[from_piece_type] < PIECE_VALUE[to_piece_type]:
             return True
 
-        # Check if the move results in more attackers for the moving player than the opponent
+        # Does the moving player have more initiative?
         attackers = board.attackers(board.turn, move.to_square)
         defenders = board.attackers(not board.turn, move.to_square)
         return len(attackers) > len(defenders)
@@ -127,7 +130,7 @@ def is_favorable_move(board: chess.Board, move: chess.Move) -> bool:
     return bool(move.promotion)
 
 
-def evaluate_piece(piece: chess.Piece, square: chess.Square, endgame: bool) -> int:
+def get_pst(piece: chess.Piece, square: chess.Square, endgame: bool) -> int:
     """
     Evaluates the given chess piece on the given square.
 
@@ -140,7 +143,7 @@ def evaluate_piece(piece: chess.Piece, square: chess.Square, endgame: bool) -> i
         int: The evaluation score for the given piece on the given square.
     """
 
-    # Determine the appropriate PST mapping based on the piece and endgame status.
+    # Get the appropriate PST mapping based on the piece and endgame status.
     if endgame and piece.piece_type == chess.KING:
         mapping = KING_ENDGAME[::(-1)**piece.color]
     else:
@@ -168,7 +171,7 @@ def evaluate_board(board: chess.Board) -> int:
 
     # Evaluate each piece on the board and add its value to the result
     for square, piece in board.piece_map().items():
-        val = PIECE_VALUE[piece.piece_type] + evaluate_piece(piece, square, endgame)
+        val = PIECE_VALUE[piece.piece_type] + get_pst(piece, square, endgame)
         res += val * (-1)**bool(not piece.color)
 
     # Return the final evaluation score
@@ -203,6 +206,10 @@ def check_endgame(board: chess.Board) -> bool:
             black_minor += piece.color == chess.BLACK
 
     # Evaluate if both sides meet the threshold to be in an end game
-    white_endgame = (white_queens == 0) or (white_queens == 1 and white_minor <= 1)
-    black_endgame = (black_queens == 0) or (black_queens == 1 and black_minor <= 1)
+    white_endgame = (white_queens == 0) or (
+        white_queens == 1 and white_minor <= 1
+    )
+    black_endgame = (black_queens == 0) or (
+        black_queens == 1 and black_minor <= 1
+    )
     return white_endgame and black_endgame

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import argparse
 import logging
 
@@ -7,12 +9,29 @@ from osmanthus.engine import get_engine_move
 
 
 # Set up the command line argument parser
-parser = argparse.ArgumentParser(description="Play chess against an engine in the terminal.")
-parser.add_argument("--debug", action="store_true", help="Enable debug logging.")
-parser.add_argument("--selfplay", action="store_true", help="Engine plays against itself.")
-parser.add_argument("--depth", type=int, default=3, help="Engine search depth. Defaults to 3.")
-parser.add_argument("--limit", type=int, default=15, help="Engine time limit. Defaults to 15.")
-parser.add_argument("--fen", type=str, default="", help="Starting position in FEN notation.")
+parser = argparse.ArgumentParser(
+    description="Play chess against an engine in the terminal.",
+)
+parser.add_argument(
+    "--debug", action="store_true",
+    help="Enable debug logging.",
+)
+parser.add_argument(
+    "--selfplay", action="store_true",
+    help="Engine plays against itself.",
+)
+parser.add_argument(
+    "--depth", type=int, default=3,
+    help="Engine search depth. Defaults to 3.",
+)
+parser.add_argument(
+    "--limit", type=int, default=15,
+    help="Engine time limit. Defaults to 15.",
+)
+parser.add_argument(
+    "--fen", type=str, default="",
+    help="Starting position in FEN notation.",
+)
 
 
 def main() -> None:
@@ -40,7 +59,9 @@ def main() -> None:
     sides = {"w": chess.WHITE, "b": chess.BLACK}
     user_color = chess.WHITE if args.selfplay else None
     while user_color is None:
-        user_color = sides.get(input("Play as [w]hite or [b]lack? ").strip().lower()[:1])
+        user_color = sides.get(
+            input("Play as [w]hite or [b]lack? ").strip().lower()[:1],
+        )
 
     # Main game loop
     try:
@@ -54,7 +75,9 @@ def main() -> None:
                 while not (move := get_user_move(board)):
                     print("Illegal Move.")
             else:
-                move = get_engine_move(board, args.depth, args.limit, args.debug)
+                move = get_engine_move(
+                    board, args.depth, args.limit, args.debug,
+                )
                 print(f"My move: {board.san(move)}")
 
             # Push the move to the board
@@ -90,13 +113,15 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
     highlight_color = "\x1b[48;5;153m"
 
     # Determine row and column ranges based on user's color preference
-    rows = range(8)[::(-1)**(user_color == chess.WHITE)]
-    cols = range(8)[::(-1)**(user_color == chess.BLACK)]
+    rows = range(8)[::(-1)**(user_color)]
+    cols = range(8)[::(-1)**(not user_color)]
 
     # Iterate over the rows and columns to print the board
     for row in rows:
         line = [f"{start_color} {row+1}"]
         for col in cols:
+            square = chess.square(col, row)
+
             # Determine the background color for the square
             if (row + col) % 2:
                 bg_color = dark_square_color
@@ -106,22 +131,23 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
             # Highlight the square if it was involved in the last move
             if board.move_stack:
                 last_move = board.peek()
-                if 8 * row + col in {last_move.from_square, last_move.to_square}:
+                if square in {last_move.from_square, last_move.to_square}:
                     bg_color = highlight_color
 
             # Get the piece at the current square (if any)
-            piece = board.piece_at(8 * row + col)
-            symbol = chess.UNICODE_PIECE_SYMBOLS[piece.symbol()] if piece else " "
+            if piece := board.piece_at(square):
+                symbol = chess.UNICODE_PIECE_SYMBOLS[piece.symbol()]
+            else:
+                symbol = " "
+
             line.append(bg_color + symbol)
 
         # Print the row and add the row number label
         print(f" {' '.join(line)} {start_color} {end_color}")
 
     # Print the column labels at the bottom of the board
-    if user_color == chess.WHITE:
-        print(f" {start_color}   a b c d e f g h  {end_color}\n")
-    else:
-        print(f" {start_color}   h g f e d c b a  {end_color}\n")
+    file_names = " ".join(chess.FILE_NAMES)[::(-1)**(not user_color)]
+    print(f" {start_color}   {file_names}  {end_color}\n")
 
 
 def get_user_move(board: chess.Board) -> chess.Move | None:

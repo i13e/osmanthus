@@ -1,15 +1,17 @@
-# pylint: disable=W0603
+# flake8: noqa
+from __future__ import annotations
+
 import sys
 import time
 from collections import defaultdict
-from functools import cache
 from pathlib import Path
 
 import chess
-import chess.polyglot
+from chess import polyglot
 
 from osmanthus.evaluate import evaluate_board
 from osmanthus.evaluate import is_favorable_move
+# from functools import cache
 # from osmanthus.evaluate import check_endgame
 
 
@@ -76,7 +78,7 @@ def get_opening_database_moves(board: chess.Board) -> chess.Move | None:
     book_path = dir_path / "performance.bin"
 
     # Open the opening book file with Polyglot
-    with chess.polyglot.open_reader(book_path) as reader:
+    with polyglot.open_reader(book_path) as reader:
         try:
             # Get a random move from the opening book
             return reader.weighted_choice(board).move
@@ -123,13 +125,17 @@ def iterative_deepening(board: chess.Board, depth: int, debug: bool) -> chess.Mo
 
             # Print debug information if requested
             if debug:
-                print(f"Completed search with depth {DEPTH}. "
-                      f"Best move so far: {board.san(global_best_move)} "
-                      f"(Score: {current_score})")
+                print(
+                    f"Completed search with depth {DEPTH}. "
+                    f"Best move so far: {board.san(global_best_move)} "
+                    f"(Score: {current_score})",
+                )
 
     return global_best_move
 
 # @cache
+
+
 def minimax(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
     """
     Compute the best move using the minimax algorithm with alpha-beta pruning.
@@ -169,8 +175,10 @@ def minimax(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
     board_scores = move_scores.get(board.fen(), {})
 
     # Sort the legal moves based on the scores
-    moves = sorted(board.legal_moves, key=lambda move: board_scores.get(move, 0)
-                   * (-1)**board.turn)
+    moves = sorted(
+        board.legal_moves, key=lambda move: board_scores.get(move, 0)
+        * (-1)**board.turn,
+    )
 
     # Loop through each legal move and update the score if necessary
     for move in moves:
@@ -220,7 +228,9 @@ def quiescence_search(board: chess.Board, alpha: int, beta: int, depth: int) -> 
         return evaluate_board(board)
 
     # determine favorable moves
-    favorable_moves = [move for move in board.legal_moves if is_favorable_move(board, move)]
+    favorable_moves = [
+        move for move in board.legal_moves if is_favorable_move(board, move)
+    ]
 
     # if no favorable moves available, return evaluated score
     if not favorable_moves:
@@ -240,7 +250,9 @@ def quiescence_search(board: chess.Board, alpha: int, beta: int, depth: int) -> 
         board.pop()
 
         # update best score and alpha/beta values
-        score = max(score, move_score) if board.turn else min(score, move_score)
+        score = max(score, move_score) if board.turn else min(
+            score, move_score,
+        )
 
         if (board.turn and score >= beta) or ((not board.turn) and score <= alpha):
             break

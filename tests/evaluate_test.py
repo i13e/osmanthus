@@ -1,10 +1,12 @@
-from pathlib import Path
+from __future__ import annotations
 
 import chess
 
 from osmanthus.evaluate import check_endgame
 from osmanthus.evaluate import evaluate_board
 from osmanthus.evaluate import is_favorable_move
+# from pathlib import Path
+
 
 def test_favorable_move() -> None:
     """
@@ -23,7 +25,10 @@ def test_favorable_move() -> None:
         # Create a new chess board using the FEN string
         board = chess.Board(fen)
         # Check if any of the legal moves are favorable
-        assert any(is_favorable_move(board, move) for move in board.legal_moves)
+        assert any(
+            is_favorable_move(board, move)
+            for move in board.legal_moves
+        )
 
 
 def test_is_endgame() -> None:
@@ -56,9 +61,13 @@ def test_evaluate_board() -> None:
     """
 
     # Test a position where white is down one pawn
-    white_down_one_pawn = chess.Board("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1")
+    white_down_one_pawn = chess.Board(
+        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPP1/RNBQKBNR w KQkq - 0 1",
+    )
     assert evaluate_board(white_down_one_pawn) < 0
 
     # Test a position where white has played e4
-    white_played_e4 = chess.Board("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1")
+    white_played_e4 = chess.Board(
+        "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+    )
     assert evaluate_board(white_played_e4) > 0

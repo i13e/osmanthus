@@ -55,7 +55,7 @@ python -m osmanthus.cli
 <!-- Maybe include a gif of the interface here? -->
 
 Moves can be input in Standard Algebraic Notation (SAN) or Universal Chess Interface notation. We
-recommend using SAN. If you are new to this notation, we have provided a short guide on our 
+recommend using SAN. If you are new to this notation, we have provided a short guide on our
 [wiki page](https://github.com/i13e/osmanthus/wiki/san).
 
 If you are new to playing chess, we suggest checking out [this video](https://www.youtube.com/watch?v=OCSbzArwB10)
