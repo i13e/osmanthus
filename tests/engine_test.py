@@ -1,4 +1,7 @@
+from pathlib import Path
+
 import chess
+
 from osmanthus.engine import get_engine_move
 
 
@@ -8,9 +11,11 @@ def test_mate_in_one() -> None:
     checkmate in two moves in various board states.
     """
 
+    dir_path = Path(__file__).resolve().parent
+    fen_path = dir_path / "test_files" / "mate1.fen"
 
     # Load FEN positions from a file
-    with open("tests/test_files/mate1.fen", encoding="utf-8") as file:
+    with open(fen_path, encoding="utf-8") as file:
         mate1_puzzles = (line.strip() for line in file.readlines())
 
     # Iterate through each board position and test if engine can find mate-in-1
@@ -30,8 +35,11 @@ def test_mate_in_two() -> None:
     checkmate in two moves in various board states.
     """
 
+    dir_path = Path(__file__).resolve().parent
+    fen_path = dir_path / "test_files" / "mate2.fen"
+
     # Load FEN positions from a file
-    with open("tests/test_files/mate2.fen", encoding="utf-8") as file:
+    with open(fen_path, encoding="utf-8") as file:
         mate2_puzzles = (line.strip() for line in file.readlines())
 
     # Iterate through each board position and test if engine can find mate-in-2

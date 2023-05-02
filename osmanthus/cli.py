@@ -3,7 +3,7 @@ import logging
 
 import chess
 
-from .engine import get_engine_move
+from osmanthus.engine import get_engine_move
 
 
 # Set up the command line argument parser
@@ -30,17 +30,17 @@ def main() -> None:
     # Set logging level based on the `--debug` flag
     logging.basicConfig(level=logging.DEBUG if args.debug else logging.ERROR)
 
-    # Determine whether the user is playing as white or black
-    sides = {"w": chess.WHITE, "b": chess.BLACK}
-    user_color = chess.WHITE if args.selfplay else None
-    while user_color is None:
-        user_color = sides.get(input("Play as [w]hite or [b]lack? ").strip().lower()[:1])
-
     # Create the starting board, either from the FEN string or the default
     try:
         board = chess.Board(args.fen)
     except ValueError:
         board = chess.Board()
+
+    # Determine whether the user is playing as white or black
+    sides = {"w": chess.WHITE, "b": chess.BLACK}
+    user_color = chess.WHITE if args.selfplay else None
+    while user_color is None:
+        user_color = sides.get(input("Play as [w]hite or [b]lack? ").strip().lower()[:1])
 
     # Main game loop
     try:

@@ -2,13 +2,15 @@
 import sys
 import time
 from collections import defaultdict
+from functools import cache
+from pathlib import Path
 
 import chess
 import chess.polyglot
 
-from .evaluate import evaluate_board
-# from .evaluate import check_endgame
-from .evaluate import is_favorable_move
+from osmanthus.evaluate import evaluate_board
+from osmanthus.evaluate import is_favorable_move
+# from osmanthus.evaluate import check_endgame
 
 
 # chess.Board.__hash__ = chess.polyglot.zobrist_hash
@@ -70,8 +72,11 @@ def get_opening_database_moves(board: chess.Board) -> chess.Move | None:
         chess.Move | None: A move from the opening book, if available.
     """
 
+    dir_path = Path(__file__).resolve().parent
+    book_path = dir_path / "performance.bin"
+
     # Open the opening book file with Polyglot
-    with chess.polyglot.open_reader("osmanthus/performance.bin") as reader:
+    with chess.polyglot.open_reader(book_path) as reader:
         try:
             # Get a random move from the opening book
             return reader.weighted_choice(board).move
@@ -124,7 +129,7 @@ def iterative_deepening(board: chess.Board, depth: int, debug: bool) -> chess.Mo
 
     return global_best_move
 
-
+# @cache
 def minimax(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
     """
     Compute the best move using the minimax algorithm with alpha-beta pruning.
@@ -192,6 +197,7 @@ def minimax(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
     return score
 
 
+# @cache
 def quiescence_search(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
     """
     Quiescence Search algorithm used for alpha-beta pruning of chess board.
