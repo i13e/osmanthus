@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import argparse
 import logging
+import os
 
 import chess
 
 from osmanthus.engine import get_engine_move
+# from chess import pgn
 
 
 # Set up the command line argument parser
@@ -82,13 +84,18 @@ def main() -> None:
 
             # Push the move to the board
             board.push(move)
+
+            # Clear the screen
+            os.system("clear")
+
     # Exit gracefully on C-c
     except KeyboardInterrupt:
-        return
+        return None
 
     # Print the final state of the board and the result of the game
     print_fancy_board(board, user_color)
     print(f"Result: [w] {board.result()} [b]")
+    # print(pgn.Game.from_board(board))
 
 
 def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
@@ -166,8 +173,8 @@ def get_user_move(board: chess.Board) -> chess.Move | None:
     """
 
     # Choose a random legal move to suggest to the user.
-    san_option = next(iter(board.san(m) for m in board.legal_moves))
-    uci_option = next(iter(m.uci() for m in board.legal_moves))
+    san_option = next(board.san(m) for m in board.legal_moves)
+    uci_option = next(board.uci(m) for m in board.legal_moves)
 
     # Prompt user for input.
     uci = input(f"Your move (e.g. {san_option} or {uci_option}): ")
@@ -182,5 +189,5 @@ def get_user_move(board: chess.Board) -> chess.Move | None:
     return None
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

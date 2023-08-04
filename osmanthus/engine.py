@@ -58,7 +58,7 @@ def get_engine_move(board: chess.Board, depth=3, limit=15, debug=False) -> chess
 
     # Calculate the time taken and print debug info if requested
     DEBUG_INFO["time"] = time.time() - start_time
-    if debug:
+    if debug:  # pragma: no cover
         print(f"debug info: {DEBUG_INFO}")
     return move
 
@@ -124,7 +124,7 @@ def iterative_deepening(board: chess.Board, depth: int, debug: bool) -> chess.Mo
             global_best_move = best_move
 
             # Print debug information if requested
-            if debug:
+            if debug:  # pragma: no cover
                 print(
                     f"Completed search with depth {DEPTH}. "
                     f"Best move so far: {board.san(global_best_move)} "

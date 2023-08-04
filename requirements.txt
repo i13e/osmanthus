@@ -1,3 +1,4 @@
 chess==1.9.4
+coverage
 pre-commit
 pytest
