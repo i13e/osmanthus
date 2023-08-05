@@ -1,3 +1,6 @@
+
+![](https://github.com/i13e/osmanthus/assets/62034540/493798b0-39c1-4566-8b99-83941e2e6994)
+
 # Osmanthus
 
 Osmanthus is a sophisticated chess engine that employs advanced algorithms to
@@ -51,8 +54,6 @@ To start the CLI interface, enter the following command:
 ```sh
 python -m osmanthus.cli
 ```
-
-<!-- Maybe include a gif of the interface here? -->
 
 Moves can be input in Standard Algebraic Notation (SAN) or Universal Chess Interface notation. We
 recommend using SAN. If you are new to this notation, we have provided a short guide on our
