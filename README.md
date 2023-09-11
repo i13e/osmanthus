@@ -1,3 +1,5 @@
+[![build status](https://github.com/i13e/osmanthus/actions/workflows/main.yml/badge.svg)](https://github.com/i13e/osmanthus/actions/workflows/main.yml)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/i13e/osmanthus/master.svg)](https://results.pre-commit.ci/latest/github/i13e/osmanthus/master)
 
 ![](https://github.com/i13e/osmanthus/assets/62034540/493798b0-39c1-4566-8b99-83941e2e6994)
 
