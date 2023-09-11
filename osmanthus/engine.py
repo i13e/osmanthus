@@ -176,8 +176,8 @@ def minimax(board: chess.Board, alpha: int, beta: int, depth: int) -> int:
 
     # Sort the legal moves based on the scores
     moves = sorted(
-        board.legal_moves, key=lambda move: board_scores.get(move, 0)
-        * (-1)**board.turn,
+        board.legal_moves, key=lambda move: board_scores.get(move, 0) *
+        (-1)**board.turn,
     )
 
     # Loop through each legal move and update the score if necessary
