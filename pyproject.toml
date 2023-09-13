@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "osmanthus"
+version = "0.1.0"
+description = "An algorithmic chess engine, written in Python."
+authors = [{ name = "Ian Breckenridge", email = "i13e@i13e.org" }]
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["chess"]
+dependencies = ["chess==1.9.4"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+  "Programming Language :: Python :: 3.9"
+  "Programming Language :: Python :: 3.10"
+  "Programming Language :: Python :: 3.11"
+  "Python :: Implementation :: CPython"
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+]
+
+[project.scripts]
+# osmanthus = "osmanthus.main:main"
+osmanthus-cli = "osmanthus.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/i13e/osmanthus"
+"Documentation" = "https://github.com/i13e/osmanthus/wiki"
+"Bug Tracker" = "https://github.com/i13e/osmanthus/issues"
