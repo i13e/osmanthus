@@ -31,12 +31,12 @@ parser.add_argument(
     help="Engine time limit. Defaults to 15.",
 )
 parser.add_argument(
-    "--fen", type=str, default="",
+    "--fen", type=str, default=chess.STARTING_FEN,
     help="Starting position in FEN notation.",
 )
 
 
-def main() -> None:
+def main() -> int:
     """
     Parse command line arguments, initialize the game board, and enter the main
     game loop. The game loop alternates between the user and the AI making
@@ -68,11 +68,14 @@ def main() -> None:
     # Main game loop
     try:
         while not board.is_game_over():
+            # Clear screen
+            os.system("clear")
+
             # Display the current state of the board
             print_fancy_board(board, user_color)
 
             move = None
-            # Determine the next move, either from user or engine
+            # Get user/engine move
             if not args.selfplay and board.turn == user_color:
                 while not (move := get_user_move(board)):
                     print("Illegal Move.")
@@ -80,22 +83,20 @@ def main() -> None:
                 move = get_engine_move(
                     board, args.depth, args.limit, args.debug,
                 )
-                print(f"My move: {board.san(move)}")
+                # print(f"{board.turn}'s move: {board.san(move)}")
 
             # Push the move to the board
             board.push(move)
 
-            # Clear the screen
-            os.system("clear")
-
     # Exit gracefully on C-c
     except KeyboardInterrupt:
-        return None
+        return 1
 
-    # Print the final state of the board and the result of the game
+    # Print the final position and game result
     print_fancy_board(board, user_color)
     print(f"Result: [w] {board.result()} [b]")
     # print(pgn.Game.from_board(board))
+    return 0
 
 
 def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
@@ -190,4 +191,4 @@ def get_user_move(board: chess.Board) -> chess.Move | None:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    main()
+    exit(main())
