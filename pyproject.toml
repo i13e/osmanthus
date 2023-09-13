@@ -11,7 +11,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
 keywords = ["chess"]
-dependencies = ["chess==1.9.4"]
+dependencies = ["chess==1.10.0"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
