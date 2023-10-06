@@ -4,7 +4,13 @@ on:
   push:
     branches: [master, test-me-*]
     tags: '*'
+    paths:
+      - "osmanthus/**"
+      - "tests/**"
   pull_request:
+    paths:
+      - "osmanthus/**"
+      - "tests/**"
 jobs:
   build:
     runs-on: ubuntu-latest
