@@ -17,12 +17,15 @@ keywords = ["chess"]
 dependencies = ["chess==1.10.0"]
 classifiers = [
   "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: Implementation :: CPython",
-  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+  "Topic :: Games/Entertainment :: Board Games",
+  "Topic :: Games/Entertainment :: Turn Based Strategy",
+  "Typing :: Typed",
 ]
 
 [project.scripts]
@@ -30,6 +33,6 @@ classifiers = [
 osmanthus-cli = "osmanthus.cli:main"
 
 [project.urls]
-"Homepage" = "https://github.com/i13e/osmanthus"
+"Repository" = "https://github.com/i13e/osmanthus"
 "Documentation" = "https://github.com/i13e/osmanthus/wiki"
 "Bug Tracker" = "https://github.com/i13e/osmanthus/issues"
