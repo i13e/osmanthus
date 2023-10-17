@@ -9,10 +9,10 @@ osmanthus = ["performance.bin"]
 name = "osmanthus"
 version = "0.1.2"
 description = "An algorithmic chess engine, written in Python."
-authors = [{ name = "Ian Breckenridge", email = "i13e@i13e.org" }]
+authors = [{name = "Ian Breckenridge", email = "i13e@i13e.org"}]
 readme = "README.md"
 requires-python = ">=3.9"
-license = "GPL-3.0-or-later"
+license = {text = "GPL-3.0-or-later"}
 keywords = ["chess"]
 dependencies = ["chess==1.10.0"]
 classifiers = [
