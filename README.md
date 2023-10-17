@@ -9,7 +9,7 @@ Osmanthus is a sophisticated chess engine that employs advanced algorithms to pr
 and enjoyable playing experience. It offers a range of features, including self play, puzzle
 solving, and an intuitive command-line interface.
 
-## Getting Started
+## Installation
 
 Osmanthus can be easily installed using pip:
 
@@ -17,7 +17,7 @@ Osmanthus can be easily installed using pip:
 pip install osmanthus
 ```
 
-## Play via CLI
+## Usage
 
 To start the CLI interface, enter the following command:
 
