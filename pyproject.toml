@@ -12,7 +12,7 @@ description = "An algorithmic chess engine, written in Python."
 authors = [{ name = "Ian Breckenridge", email = "i13e@i13e.org" }]
 readme = "README.md"
 requires-python = ">=3.9"
-license = { file = "LICENSE" }
+license = "GPL-3.0-or-later"
 keywords = ["chess"]
 dependencies = ["chess==1.10.0"]
 classifiers = [
