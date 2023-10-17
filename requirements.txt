@@ -1,4 +1,5 @@
 chess==1.10.0
+covdefaults
 coverage
 pre-commit
 pytest

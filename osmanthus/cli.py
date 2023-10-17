@@ -191,4 +191,4 @@ def get_user_move(board: chess.Board) -> chess.Move | None:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    exit(main())
+    raise SystemExit(main())
