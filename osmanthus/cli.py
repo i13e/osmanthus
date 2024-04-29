@@ -126,7 +126,7 @@ def print_fancy_board(board: chess.Board, user_color=chess.WHITE) -> None:
 
     # Iterate over the rows and columns to print the board
     for row in rows:
-        line = [f"{start_color} {row+1}"]
+        line = [f"{start_color} {row + 1}"]
         for col in cols:
             square = chess.square(col, row)
 
