@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.package-data]
@@ -7,7 +7,7 @@ osmanthus = ["performance.bin"]
 
 [project]
 name = "osmanthus"
-version = "0.1.2"
+dynamic = ["version"]
 description = "An algorithmic chess engine, written in Python."
 authors = [{name = "Ian Breckenridge"}]
 readme = "README.md"
@@ -35,3 +35,5 @@ osmanthus-cli = "osmanthus.cli:main"
 Repository = "https://github.com/i13e/osmanthus"
 Documentation = "https://github.com/i13e/osmanthus/wiki"
 Issues = "https://github.com/i13e/osmanthus/issues"
+
+[tool.setuptools_scm]
