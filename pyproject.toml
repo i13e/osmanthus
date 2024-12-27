@@ -9,10 +9,9 @@ osmanthus = ["performance.bin"]
 name = "osmanthus"
 version = "0.1.2"
 description = "An algorithmic chess engine, written in Python."
-authors = [{name = "Ian Breckenridge", email = "i13e@i13e.org"}]
+authors = [{name = "Ian Breckenridge"}]
 readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "GPL-3.0-or-later"}
 keywords = ["chess"]
 dependencies = ["chess==1.11.1"]
 classifiers = [
@@ -33,6 +32,6 @@ classifiers = [
 osmanthus-cli = "osmanthus.cli:main"
 
 [project.urls]
-"Repository" = "https://github.com/i13e/osmanthus"
-"Documentation" = "https://github.com/i13e/osmanthus/wiki"
-"Bug Tracker" = "https://github.com/i13e/osmanthus/issues"
+Repository = "https://github.com/i13e/osmanthus"
+Documentation = "https://github.com/i13e/osmanthus/wiki"
+Issues = "https://github.com/i13e/osmanthus/issues"
