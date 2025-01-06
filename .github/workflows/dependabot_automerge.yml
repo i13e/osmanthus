@@ -1,18 +1,18 @@
-name: Dependabot auto-approve / -merge
+name: Auto-approve / -merge for Dependabot and Precommit CI
 on: pull_request
 
 jobs:
-  dependabot:
+  auto_merge:
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
     env:
-      PR_URL: ${{github.event.pull_request.html_url}}
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    if: ${{ github.actor == 'dependabot[bot]' }}
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    if: ${{ github.actor == 'dependabot[bot]' || github.actor == 'precommit-ci' }}
     steps:
       - name: Approve a PR
         run: gh pr review --approve "$PR_URL"
-      - name: Enable auto-merge for Dependabot PRs
+      - name: Enable auto-merge for Dependabot or Precommit CI PRs
         run: gh pr merge --auto --squash "$PR_URL"
